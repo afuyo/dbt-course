@@ -2,7 +2,6 @@ version: 2
 
 sources:
   - name: jaffle_shop
-    description: "codegen generated"
     database: raw
     tables:
       - name: customers
