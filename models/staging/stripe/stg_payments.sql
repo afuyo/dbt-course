@@ -1,11 +1,22 @@
-with payments as (
-    select 
-        ID as payment_id, 
+with source as (
+
+    select * from {{ source('stripe', 'payment') }}
+
+),
+
+renamed as (
+
+    select
+         ID as payment_id, 
         ORDERID as order_id, 
         PAYMENTMETHOD as payment_method,
         STATUS, 
         AMOUNT, 
-        CREATED
-     from raw.stripe.payment
-)  
-select * from payments
+        CREATED,
+        _batched_at
+
+    from source
+
+)
+
+select * from renamed
